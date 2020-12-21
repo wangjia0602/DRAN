@@ -133,8 +133,8 @@ class DRAN(nn.Module):
             x = l(x)
             fusions.append(self.fusion(torch.cat((self.sa(x), self.ca(x)), 1)))
             # fusions.append(x)
-        y = self.fusion_end(torch.cat(fusions, 1))
-        # y = self.ca(self.fusion_end(torch.cat(fusions, 1)))
+        # y = self.fusion_end(torch.cat(fusions, 1))
+        y = self.ca(self.fusion_end(torch.cat(fusions, 1)))
         hfeb = self.hfeb(first)
         res = res + self.sa(x) + hfeb + y
         # res = self.sa(x) + res + hfeb
