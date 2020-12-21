@@ -90,7 +90,7 @@ class DRAN(nn.Module):
         modules_head = [conv(args.n_colors, n_feat, kernel_size)]
         # modules_head = [nn.Conv2d(args.n_colors, n_feat, 5, 1, 2)]
 
-        modules_head_2 = [conv(n_feat, n_feat, kernel_size)]
+        # modules_head_2 = [conv(n_feat, n_feat, kernel_size)]
         self.conv1 = nn.Conv2d(n_feat, n_feat, kernel_size=1, stride=1, padding=0, bias=True),
 
         # define body module
@@ -105,7 +105,7 @@ class DRAN(nn.Module):
         self.add_mean = MeanShift(255, rgb_mean, rgb_std, 1)
 
         self.head_1 = nn.Sequential(*modules_head)
-        self.head_2 = nn.Sequential(*modules_head_2)
+        # self.head_2 = nn.Sequential(*modules_head_2)
         self.fusion = nn.Sequential(*[nn.Conv2d(n_feat * 2, n_feat, 1, padding=0, stride=1)])
         self.fusion_end = nn.Sequential(*[nn.Conv2d(n_feat * self.n_resgroups, n_feat, 1, padding=0, stride=1)])
 
@@ -123,7 +123,7 @@ class DRAN(nn.Module):
         x = self.head_1(x)
         # print(x[0][0])
         res = x
-        x = self.head_2(x)
+        # x = self.head_2(x)
 
         res_x = x
 
@@ -133,8 +133,8 @@ class DRAN(nn.Module):
             x = l(x)
             fusions.append(self.fusion(torch.cat((self.sa(x), self.ca(x)), 1)))
             # fusions.append(x)
-        # y = self.fusion_end(torch.cat(fusions, 1))
-        y = self.ca(self.fusion_end(torch.cat(fusions, 1)))
+        y = self.fusion_end(torch.cat(fusions, 1))
+        # y = self.ca(self.fusion_end(torch.cat(fusions, 1)))
         hfeb = self.hfeb(first)
         res = res + self.sa(x) + hfeb + y
         # res = self.sa(x) + res + hfeb
