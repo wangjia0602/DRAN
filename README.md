@@ -31,7 +31,7 @@ You can evaluate your models with widely-used benchmark datasets:
 
 [Set14 - Zeyde et al. LNCS 2010](https://sites.google.com/site/romanzeyde/research-interests),
 
-[B100 - Martin et al. ICCV 2001](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/),
+[B100 - Martin et al. ICCV 2012](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/),
 
 [Urban100 - Huang et al. CVPR 2015](https://sites.google.com/site/jbhuang0604/publications/struct_sr).
 
